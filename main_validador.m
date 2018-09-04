@@ -1,9 +1,11 @@
 clc, clear all;
+
+%% read data kinect
+load('posicionesallbd.mat');
+allccs = unique(posicionesallbd.cc);
+
+
 %% Variables globales
-name_folder = 'S1_Data';
-num_subjects=21;
-type_of_test = 'CWS'; %comfortable walking speed (CWS) and maximum walking speed (MWS). 
-num_test = 3; % 3 first test were at CWS, 3 last test were at MWS
 
 counter = 1;
 lim_inferior = 2; % desde 2 metros
@@ -11,12 +13,6 @@ lim_superior = 8; % hasta n metros
 distancia_str = strcat(mat2str(lim_inferior),'_',mat2str(lim_superior),'metros');
 
 completar_con = 1;% 0 para reemplazar por 0 y 1 para reemplazar por NaN e interpolar
-
-if completar_con == 0
-    aux_name_file = strcat('nan_values_',type_of_test);
-elseif completar_con == 1
-    aux_name_file = strcat('interpolado',type_of_test);
-end
 
 all_name_files = cell(num_subjects*num_test,1);
 result_icc = cell(num_subjects*num_test,1);

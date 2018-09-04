@@ -28,8 +28,9 @@ end
 valor_maxima_longitud = max(longitudes);
 bool_longitudes = (longitudes == valor_maxima_longitud);
 
-% if(~isempty(vector))
-    ret = vector(bool_longitudes,:);
-% else
-%     ret = 0;
+    if(~isempty(vector))
+        ret = vector(bool_longitudes,:);
+    else
+        ret = 0;
+    end
 end
