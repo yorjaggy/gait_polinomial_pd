@@ -1,10 +1,10 @@
 clc, clear all;
 
-load('posicionesallbd.mat');
+load('posiciones_ankles.mat');
 
 %% Variables globales
 num_coefs = 10;
-num_test = length(unique(posicionesallbd.idtest));
+num_test = length(unique(posiciones_ankles.idtest));
 
 coeficientes = cell(num_test,1);
 
@@ -14,20 +14,20 @@ lim_superior = 3.5; % hasta n metros
 
 %%
 
-cedulas = unique(posicionesallbd.cc);
+cedulas = unique(posiciones_ankles.cc);
 
 for i=1:length(cedulas)
     
     cc = cedulas(i);
-    sub_posicionesallbd = posicionesallbd(posicionesallbd.cc==cc,:);
+    sub_posicionesallbd = posiciones_ankles(posiciones_ankles.cc==cc,:);
     ids_test = unique(sub_posicionesallbd.idtest);
     
     for j=1:length(ids_test)
         idt = ids_test(j);
         paciente_posicionesallbd = sub_posicionesallbd(strcmp(sub_posicionesallbd.idtest,idt),:);
         
-        signal_left = paciente_posicionesallbd(strcmp(paciente_posicionesallbd.JointType,'AnkleLeft'),[8,11]);
-        signal_right = paciente_posicionesallbd(strcmp(paciente_posicionesallbd.JointType,'AnkleRight'),[8,11]);
+        signal_left = paciente_posicionesallbd(strcmp(paciente_posicionesallbd.JointType,'AnkleLeft'),[7,8]);
+        signal_right = paciente_posicionesallbd(strcmp(paciente_posicionesallbd.JointType,'AnkleRight'),[7,8]);
         
         % Indexes signal in valid range
         index_left = indexes_signal_in_valid_range(signal_left.JointZ,lim_inferior,lim_superior);
